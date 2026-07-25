@@ -391,6 +391,11 @@
       <textarea id="message" name="message" placeholder="Tell me about the record, the deadline, and what you're going for." required></textarea>
     </div>
 
+    <div class="field">
+      <label for="captcha" id="captchaLabel">Quick check</label>
+      <input type="text" id="captcha" name="captcha" inputmode="numeric" autocomplete="off" placeholder="Your answer" required>
+    </div>
+
     <button class="submit-btn" type="submit">Send message</button>
     <p class="form-note" id="formNote">&nbsp;</p>
   </form>
@@ -418,6 +423,27 @@
   const form = document.getElementById('contactForm');
   const note = document.getElementById('formNote');
 
+  // ===================================================================
+  // CAPTCHA (simple client-side math check)
+  // Deters basic/automated bots without any backend or third-party
+  // key. Not bulletproof against a determined attacker who reads the
+  // page source, but stops the vast majority of spam bots — same
+  // spirit as the honeypot field above. Regenerates on load and after
+  // every submit attempt so a stale answer can't be replayed.
+  // ===================================================================
+  const captchaLabel = document.getElementById('captchaLabel');
+  const captchaInput = document.getElementById('captcha');
+  let captchaAnswer = 0;
+
+  function newCaptcha() {
+    const a = Math.floor(Math.random() * 8) + 1;
+    const b = Math.floor(Math.random() * 8) + 1;
+    captchaAnswer = a + b;
+    captchaLabel.textContent = `Quick check: what is ${a} + ${b}?`;
+    captchaInput.value = '';
+  }
+  newCaptcha();
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -429,9 +455,16 @@
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const message = document.getElementById('message').value.trim();
+    const captchaValue = captchaInput.value.trim();
 
-    if (!name || !email || !message) {
+    if (!name || !email || !message || !captchaValue) {
       note.textContent = 'Please fill in every field before sending.';
+      return;
+    }
+
+    if (parseInt(captchaValue, 10) !== captchaAnswer) {
+      note.textContent = 'That answer isn\'t quite right — please try again.';
+      newCaptcha();
       return;
     }
 
@@ -442,6 +475,7 @@
 
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
     note.textContent = 'Opening your email client to send this along…';
+    newCaptcha();
 
     /* --------------------------------------------------------------
        ALTERNATIVE: send silently via a form backend instead of
