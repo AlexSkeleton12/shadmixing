@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Shad Mixing — Alexander Shad, Audio Engineer</title>
+<meta name="description" content="Shad Mixing — mixing engineer Alexander Shad. Discography, system, and contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue: #7bb7fc;
+    --blue-deep: #5a9ce8;
+    --ink: #0a0a0a;
+    --line: rgba(10,10,10,0.55);
+    --line-strong: #0a0a0a;
+    --max: 760px;
+    --gutter: clamp(20px, 6vw, 48px);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  html{background:var(--blue);}
+  body{
+    background:var(--blue);
+    color:var(--ink);
+    font-family:'Courier Prime', 'Courier New', ui-monospace, monospace;
+    line-height:1.6;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img{display:block;max-width:100%;height:auto;}
+
+  a{color:var(--ink);}
+
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 var(--gutter);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero-photo{
+    width:100%;
+    aspect-ratio:2073/617;
+    object-fit:cover;
+    display:block;
+  }
+
+  .hero-text{
+    padding-top:clamp(28px,6vw,52px);
+  }
+
+  h1.name{
+    font-weight:700;
+    font-size:clamp(2rem, 7vw, 2.9rem);
+    text-align:center;
+    letter-spacing:0.04em;
+    margin:0 0 clamp(28px,6vw,44px) 0;
+  }
+
+  .bio p{
+    font-weight:700;
+    font-size:clamp(0.92rem, 2.4vw, 1.05rem);
+    margin:0 0 1.5em 0;
+  }
+  .bio p:last-child{margin-bottom:0;}
+  .bio em{font-style:italic;font-weight:700;}
+
+  /* ---------- Section headings ---------- */
+  .section{
+    padding-top:clamp(56px,10vw,96px);
+  }
+
+  h2.section-title{
+    font-weight:700;
+    font-size:clamp(1.8rem,6vw,2.4rem);
+    text-align:center;
+    margin:0 0 0.15em 0;
+    letter-spacing:0.03em;
+  }
+
+  .section-sub{
+    text-align:center;
+    font-weight:700;
+    font-size:0.95rem;
+    margin:0 0 clamp(28px,6vw,44px) 0;
+  }
+  .section-sub em{font-style:italic;font-weight:400;}
+
+  /* ---------- System ---------- */
+  .gear{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:flex-end;
+    row-gap:36px;
+  }
+  .gear-item{
+    text-align:center;
+    flex:0 0 auto;
+  }
+  .gear-item img{
+    border:1.5px solid var(--line-strong);
+  }
+  .gear-item figcaption{
+    margin-top:8px;
+    font-weight:700;
+    font-size:0.85rem;
+  }
+  .gear-item figcaption .thin{font-weight:400;}
+
+  .gear-row-speakers{
+    display:flex;
+    justify-content:space-between;
+    width:100%;
+    gap:24px;
+  }
+  .gear-row-speakers .gear-item{width:44%;}
+  .gear-row-speakers img{width:100%;}
+
+  .gear-row-front{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    width:100%;
+    margin-top:44px;
+    flex-wrap:wrap;
+  }
+  .gear-row-front img{height:56px;width:auto;}
+
+  /* ---------- Work grid ---------- */
+  .work-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:36px 28px;
+  }
+  .work-item{text-align:center;}
+  .work-item img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border:1.5px solid var(--line-strong);
+  }
+  .work-item .title{
+    font-weight:700;
+    font-size:0.92rem;
+    margin-top:10px;
+  }
+  .work-item .artist{
+    font-weight:700;
+    font-size:0.92rem;
+  }
+  .work-item .year{
+    font-style:italic;
+    font-weight:400;
+    font-size:0.88rem;
+  }
+
+  .more{
+    text-align:center;
+    font-weight:700;
+    margin-top:36px;
+    font-size:0.95rem;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    margin-top:8px;
+  }
+
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+
+  .field label{
+    font-weight:700;
+    font-size:0.85rem;
+    letter-spacing:0.02em;
+  }
+
+  .field input,
+  .field textarea{
+    font-family:inherit;
+    font-size:0.95rem;
+    color:var(--ink);
+    background:transparent;
+    border:none;
+    border-bottom:1.5px solid var(--line-strong);
+    padding:8px 2px;
+    outline:none;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder{
+    color:rgba(10,10,10,0.45);
+  }
+
+  .field input:focus,
+  .field textarea:focus{
+    border-bottom-width:3px;
+  }
+
+  .field textarea{
+    resize:vertical;
+    min-height:110px;
+  }
+
+  .submit-btn{
+    font-family:inherit;
+    font-weight:700;
+    font-size:1rem;
+    letter-spacing:0.04em;
+    background:var(--ink);
+    color:var(--blue);
+    border:1.5px solid var(--ink);
+    padding:14px 20px;
+    cursor:pointer;
+    margin-top:4px;
+    transition:transform 0.08s ease, background 0.15s ease, color 0.15s ease;
+  }
+  .submit-btn:hover{
+    background:transparent;
+    color:var(--ink);
+  }
+  .submit-btn:active{transform:scale(0.98);}
+
+  .form-note{
+    font-size:0.78rem;
+    font-weight:400;
+    font-style:italic;
+    margin-top:10px;
+    min-height:1.2em;
+  }
+
+  footer{
+    text-align:center;
+    font-size:0.78rem;
+    padding:clamp(56px,10vw,88px) 0 clamp(28px,6vw,40px) 0;
+    opacity:0.75;
+  }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width:600px){
+    .work-grid{grid-template-columns:repeat(2,1fr);gap:26px 18px;}
+    .gear-row-speakers{flex-direction:column;align-items:center;gap:28px;}
+    .gear-row-speakers .gear-item{width:80%;max-width:320px;}
+    .gear-row-front{gap:28px;}
+    h1.name{margin-bottom:32px;}
+  }
+
+  @media (max-width:400px){
+    .work-grid{grid-template-columns:1fr;max-width:280px;margin:0 auto;}
+  }
+
+  /* honeypot */
+  .hp{
+    position:absolute;
+    left:-9999px;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+  }
+</style>
+</head>
+<body>
+
+<img class="hero-photo" src="assets/hero.jpg" alt="Alexander Shad working at his mixing setup">
+
+<div class="wrap hero-text">
+  <h1 class="name">Shad&nbsp;&nbsp;Mixing</h1>
+
+  <div class="bio">
+    <p>Greetings. I'm Alexander Shad, an audio engineer specializing in mixing; ranging from pop all the way through to jazz. I started mixing in <em>2021</em> when I started making my own music. At the time, mixing was not a conscious action for me, but rather just a part of the recording process that I had to deal with. It was only after I listened to Steely Dan's "Gaucho" record I became infatuated with the technical aspects of music production such as recording, mixing, and mastering. Since then, I have dedicated time and thought into my mixing practice and staying true to my method &mdash; keeping things simple. You will not see me layering many effects (if any at all) on channels (that includes compression and EQ). My goal is to deliver an acoustically coherent and natural sounding result as opposed to modern absolute perfectionism, and hopefully some day, people will search for my name on the back of records when looking to test their HIFI systems.</p>
+
+    <p>Below, you will find my discography of mixed projects, my audio system, and finally a contact form so that we may discuss your project and your needs. I look forward to hearing from you.</p>
+  </div>
+</div>
+
+<section class="section wrap" id="system">
+  <h2 class="section-title">System</h2>
+  <p class="section-sub">As of <em id="asOfDate">2026-07-25</em></p>
+
+  <div class="gear">
+    <div class="gear-row-speakers">
+      <figure class="gear-item">
+        <img src="assets/speaker_l.png" alt="Adam Audio T5V studio monitor">
+        <figcaption>Adam Audio <span class="thin">T5V</span></figcaption>
+      </figure>
+      <figure class="gear-item">
+        <img src="assets/speaker_r.png" alt="Adam Audio T5V studio monitor">
+        <figcaption>Adam Audio <span class="thin">T5V</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="gear-row-front">
+      <figure class="gear-item">
+        <img src="assets/evo4.png" alt="Audient Evo 4 audio interface">
+        <figcaption>Audient Evo 4<br><span class="thin">AD/DA @ 24/96</span></figcaption>
+      </figure>
+      <figure class="gear-item">
+        <img src="assets/ds100.png" alt="SMSL DS100 DAC">
+        <figcaption>S.M.S.L. DS100<br><span class="thin">DA @ DSD256 &amp; 32/384</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap" id="work">
+  <h2 class="section-title">My&nbsp;&nbsp;Work</h2>
+  <p class="section-sub">&nbsp;</p>
+
+  <div class="work-grid">
+    <div class="work-item">
+      <img src="assets/album_theater.jpg" alt="Theater Of Vangoogoo album cover">
+      <div class="title">"Theater Of Vangoogoo"</div>
+      <div class="artist">Badron Flaco</div>
+      <div class="year">2025</div>
+    </div>
+    <div class="work-item">
+      <img src="assets/album_goo.jpg" alt="Goo Goo Monkeys album cover">
+      <div class="title">"Goo Goo Monkeys"</div>
+      <div class="artist">Goo Goo Monkeys</div>
+      <div class="year">2026</div>
+    </div>
+    <div class="work-item">
+      <img src="assets/album_otzi.jpg" alt="Ötzi album cover">
+      <div class="title">"Ötzi"</div>
+      <div class="artist">Alex Shad</div>
+      <div class="year">2024</div>
+    </div>
+    <div class="work-item">
+      <img src="assets/album_red.jpg" alt="Red album cover">
+      <div class="title">"Red"</div>
+      <div class="artist">Alex Shad</div>
+      <div class="year">2023</div>
+    </div>
+    <div class="work-item">
+      <img src="assets/album_cursed.jpg" alt="Cursed album cover">
+      <div class="title">"Cursed"</div>
+      <div class="artist">Alex Shad</div>
+      <div class="year">2023</div>
+    </div>
+    <div class="work-item">
+      <img src="assets/album_nul.jpg" alt="NUL album cover">
+      <div class="title">"NUL"</div>
+      <div class="artist">Alex Shad</div>
+      <div class="year">2022</div>
+    </div>
+    <div class="work-item">
+      <img src="assets/album_comkey.jpg" alt="Comkey Monkany album cover">
+      <div class="title">"Comkey Monkany"</div>
+      <div class="artist">Stick Figa</div>
+      <div class="year">2025</div>
+    </div>
+  </div>
+
+  <p class="more">(...and more!)</p>
+</section>
+
+<section class="section wrap" id="contact">
+  <h2 class="section-title">Contact</h2>
+  <p class="section-sub">&nbsp;</p>
+
+  <form class="contact-form" id="contactForm" autocomplete="off">
+    <!-- honeypot field to deter simple bots -->
+    <div class="hp" aria-hidden="true">
+      <label for="company">Company</label>
+      <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="field">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Your name" required>
+    </div>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required>
+    </div>
+
+    <div class="field">
+      <label for="message">Project / message</label>
+      <textarea id="message" name="message" placeholder="Tell me about the record, the deadline, and what you're going for." required></textarea>
+    </div>
+
+    <button class="submit-btn" type="submit">Send message</button>
+    <p class="form-note" id="formNote">&nbsp;</p>
+  </form>
+</section>
+
+<footer class="wrap">
+  Shad Mixing &nbsp;&mdash;&nbsp; <span id="year"></span>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ===================================================================
+  // CONTACT FORM
+  // Replace CONTACT_EMAIL below with the real inbox this should reach.
+  // This default delivers messages via a mailto: link (opens the
+  // visitor's own email client with everything pre-filled) so the form
+  // works with zero backend/hosting requirements. If Alex wants
+  // messages to land silently without opening a mail app, swap this
+  // block for a form endpoint (e.g. Formspree/Getform) — see the
+  // commented alternative below.
+  // ===================================================================
+  const CONTACT_EMAIL = "alexandershad@gmail.com";
+
+  const form = document.getElementById('contactForm');
+  const note = document.getElementById('formNote');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // honeypot check
+    if (document.getElementById('company').value.trim() !== '') {
+      return;
+    }
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !message) {
+      note.textContent = 'Please fill in every field before sending.';
+      return;
+    }
+
+    const subject = encodeURIComponent(`Mixing inquiry from ${name}`);
+    const body = encodeURIComponent(
+      `${message}\n\n---\nName: ${name}\nEmail: ${email}`
+    );
+
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    note.textContent = 'Opening your email client to send this along…';
+
+    /* --------------------------------------------------------------
+       ALTERNATIVE: send silently via a form backend instead of
+       opening a mail client. Sign up at formspree.io (free tier),
+       drop your form ID below, then use this instead of the
+       mailto redirect above:
+
+       fetch('https://formspree.io/f/YOUR_FORM_ID', {
+         method: 'POST',
+         headers: { 'Accept': 'application/json' },
+         body: new FormData(form)
+       }).then(res => {
+         if (res.ok) {
+           note.textContent = 'Message sent — I\'ll get back to you soon.';
+           form.reset();
+         } else {
+           note.textContent = 'Something went wrong. Please try again.';
+         }
+       });
+    -------------------------------------------------------------- */
+  });
+</script>
+
+</body>
+</html>
