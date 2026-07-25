@@ -410,15 +410,13 @@
 
   // ===================================================================
   // CONTACT FORM
-  // Replace CONTACT_EMAIL below with the real inbox this should reach.
-  // This default delivers messages via a mailto: link (opens the
-  // visitor's own email client with everything pre-filled) so the form
-  // works with zero backend/hosting requirements. If Alex wants
-  // messages to land silently without opening a mail app, swap this
-  // block for a form endpoint (e.g. Formspree/Getform) — see the
-  // commented alternative below.
+  // Delivers messages silently via Web3Forms (https://web3forms.com) —
+  // no mail client popup, no backend to host. WEB3FORMS_ACCESS_KEY is
+  // a public site key: it's meant to be embedded in client-side code
+  // and only allows submitting to Alex's configured inbox, so it's
+  // safe to have it visible in this file.
   // ===================================================================
-  const CONTACT_EMAIL = "alexandershad@gmail.com";
+  const WEB3FORMS_ACCESS_KEY = "e61adcae-fe45-45b8-a0da-0f3f6f2b548a";
 
   const form = document.getElementById('contactForm');
   const note = document.getElementById('formNote');
@@ -468,34 +466,41 @@
       return;
     }
 
-    const subject = encodeURIComponent(`Mixing inquiry from ${name}`);
-    const body = encodeURIComponent(
-      `${message}\n\n---\nName: ${name}\nEmail: ${email}`
-    );
+    const submitBtn = form.querySelector('.submit-btn');
+    submitBtn.disabled = true;
+    note.textContent = 'Sending…';
 
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    note.textContent = 'Opening your email client to send this along…';
-    newCaptcha();
-
-    /* --------------------------------------------------------------
-       ALTERNATIVE: send silently via a form backend instead of
-       opening a mail client. Sign up at formspree.io (free tier),
-       drop your form ID below, then use this instead of the
-       mailto redirect above:
-
-       fetch('https://formspree.io/f/YOUR_FORM_ID', {
-         method: 'POST',
-         headers: { 'Accept': 'application/json' },
-         body: new FormData(form)
-       }).then(res => {
-         if (res.ok) {
-           note.textContent = 'Message sent — I\'ll get back to you soon.';
-           form.reset();
-         } else {
-           note.textContent = 'Something went wrong. Please try again.';
-         }
-       });
-    -------------------------------------------------------------- */
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `Mixing inquiry from ${name}`,
+        from_name: name,
+        name: name,
+        email: email,
+        message: message
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        submitBtn.disabled = false;
+        newCaptcha();
+        if (data.success) {
+          note.textContent = 'Message sent — I\'ll get back to you soon.';
+          form.reset();
+        } else {
+          note.textContent = 'Something went wrong. Please try again.';
+        }
+      })
+      .catch(() => {
+        submitBtn.disabled = false;
+        newCaptcha();
+        note.textContent = 'Something went wrong. Please try again.';
+      });
   });
 </script>
 
